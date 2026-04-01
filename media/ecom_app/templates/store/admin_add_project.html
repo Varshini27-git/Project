@@ -1,0 +1,133 @@
+{% extends 'store/admin_base.html' %}
+{% block content %}
+
+<style>
+    body{
+        background: linear-gradient(135deg, #eef2f7, #dbe6f6);
+    }
+    .container {
+        max-width: 600px;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        color: linear-gradient(180deg, #0a2540, #0d3b66);;
+        margin-bottom: 25px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        /* Spacing between fields */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        box-sizing: border-box;
+        /* Crucial for width alignment */
+    }
+
+    /* Focus effect for better UX */
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color:linear-gradient(180deg, #0a2540, #0d3b66);
+        box-shadow: 0 0 5px rgba(47, 91, 231, 0.2);
+    }
+
+    textarea {
+        height: 120px;
+        resize: vertical;
+    }
+
+    /* File input styling */
+    input[type="file"] {
+        padding: 10px 0;
+        cursor: pointer;
+    }
+
+    button[type="submit"] {
+        background: linear-gradient(180deg, #0a2540, #0d3b66);
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+        background-color:linear-gradient(180deg, #0a2540, #0d3b66);
+    }
+
+    /* Labeling for the file input (Optional UI hint) */
+    form::after {
+        content: "Accepted formats: JPG, PNG, PDF";
+        font-size: 11px;
+        color: #888;
+        text-align: center;
+    }
+    
+</style>
+
+<div class="container">
+    <h2>Upload New Project</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Title</label>
+        <input type="text" name="title">
+
+        <label>Description</label>
+        <textarea name="description"></textarea>
+
+        <label>Category</label>
+        <select name="category">
+            <option value="AI">Artificial Intelligence</option>
+            <option value="ML">Machine Learning</option>
+            <option value="DL">Deep Learning</option>
+            <option value="WEB">Web Development</option>
+            <option value="IOT">Internet of Things</option>
+            <option value="DATA">Data Science</option>
+        </select>
+
+        <label>Price</label>
+        <input type="text" name="price">
+
+        <label>Google Drive Link</label>
+        <input type="url" name="drive_link">
+
+        <label>Project Image</label>
+        <input type="file" name="image">
+
+        <label>Project Video</label>
+        <input type="file" name="video">
+
+        <button type="submit">Add Project</button>
+
+    </form>
+</div>
+
+{% endblock %}

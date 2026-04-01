@@ -1,0 +1,156 @@
+{% extends 'user/user_base.html' %}
+{% block content %}
+
+<style>
+
+.page-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:50px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.register-container{
+    width:650px;
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+.register-title{
+    text-align:center;
+    color:#171b22;
+    margin-bottom:30px;
+    font-size:28px;
+    font-weight:600;
+}
+
+/* Grid form */
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:span 2;
+}
+
+label{
+    font-size:14px;
+    margin-bottom:4px;
+    font-weight:500;
+}
+
+.form-control{
+    padding:10px 12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.form-control:focus{
+    border-color:#16162fd6;
+    outline:none;
+    box-shadow:0 0 6px rgba(13,110,253,0.2);
+}
+
+textarea.form-control{
+    resize:none;
+    height:80px;
+}
+
+/* Button */
+.submit-btn{
+    width:100%;
+    background:#191e26;
+    color:white;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:500;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.submit-btn:hover{
+    background:#172437ee;
+}
+
+</style>
+
+<div class="page-wrapper">
+
+<div class="register-container">
+
+<h2 class="register-title">🎓 Student Registration</h2>
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Username</label>
+<input type="text" name="username" class="form-control" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" name="email" class="form-control" required>
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" name="password" class="form-control" required>
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<input type="text" name="phone_number" class="form-control" required>
+</div>
+
+<div class="form-group">
+<label>College Name</label>
+<input type="text" name="college_name" class="form-control" required>
+</div>
+
+<div class="form-group">
+<label>Year of Study</label>
+<input type="text" name="year_of_study" class="form-control" required>
+</div>
+
+<div class="form-group">
+<label>Department</label>
+<input type="text" name="department" class="form-control" required>
+</div>
+
+<div class="form-group full">
+<label>Address</label>
+<textarea name="address" class="form-control" required></textarea>
+</div>
+
+<div class="form-group full">
+<button type="submit" class="submit-btn">
+Register Account
+</button>
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

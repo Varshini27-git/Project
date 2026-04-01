@@ -1,0 +1,117 @@
+{% extends 'user/user_base.html' %}
+
+{% block content %}
+
+<style>
+
+.detail-container{
+    display:flex;
+    justify-content:center;
+    margin-top:50px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.detail-card{
+    width:350px;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 6px 25px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.project-image{
+    width:70%;
+    height:150px;
+    object-fit:cover;
+    border-radius:10px;
+    display:block;
+    margin:auto;
+}
+
+.project-title{
+    margin-top:20px;
+    font-size:26px;
+    font-weight:600;
+}
+
+.project-desc{
+    margin-top:10px;
+    color:#555;
+    line-height:1.6;
+}
+
+.project-info{
+    background:#f6f8fc;
+    padding:15px;
+    border-radius:8px;
+    margin-top:20px;
+}
+
+.project-info p{
+    margin:6px 0;
+    font-size:15px;
+}
+
+.price{
+    font-size:22px;
+    font-weight:bold;
+    color:#131a25;
+}
+
+/* BUTTON GROUP */
+
+.button-group{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.buy-btn{
+    flex:1;
+    padding:12px 20px;
+    background:#12151a;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+    font-size:16px;
+    text-align:center;
+}
+
+.buy-btn:hover{
+    background:#12171f;
+}
+
+</style>
+
+<div class="detail-container">
+
+<div class="detail-card">
+
+<img src="{{ project.project_image.url }}" class="project-image">
+
+<div class="project-title">{{ project.title }}</div>
+
+<p class="project-desc">{{ project.description }}</p>
+
+<div class="project-info">
+<p><b>Category:</b> {{ project.category }}</p>
+<p class="price">Price: ₹{{ project.price }}</p>
+</div>
+
+<div class="button-group">
+
+<a href="#" class="buy-btn">🎬 Output Video</a>
+
+<a href="{% url 'initiate_payment' project.id %}" class="buy-btn">
+💳 Buy Now
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

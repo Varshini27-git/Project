@@ -1,0 +1,201 @@
+{% extends "store/admin_base.html" %}
+
+{% block content %}
+
+<style>
+
+/* PAGE CARD */
+.page-card {
+   background: #ffffff;
+   padding: 30px;
+   border-radius: 16px;
+   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* TITLE */
+.page-title {
+   font-size: 24px;
+   font-weight: 600;
+   margin-bottom: 20px;
+   color: linear-gradient(180deg, #0a2540, #0d3b66);
+}
+
+/* TABLE */
+table {
+   width: 100%;
+   border-collapse: separate;
+   border-spacing: 0 10px;
+
+}
+
+/* HEADER */
+thead tr {
+   background: linear-gradient(180deg, #0a2540, #0d3b66);
+   color: white;
+}
+
+thead th {
+   padding: 14px;
+   text-align: left;
+   font-size: 14px;
+   font-weight: 500;
+   background:linear-gradient(180deg, #0a2540, #0d3b66); ;
+}
+
+/* ROUNDED HEADER */
+thead th:first-child {
+   border-top-left-radius: 10px;
+   border-bottom-left-radius: 10px;
+}
+
+thead th:last-child {
+   border-top-right-radius: 10px;
+   border-bottom-right-radius: 10px;
+}
+
+/* BODY ROWS */
+tbody tr {
+   background: #ffffff;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+   transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+   transform: scale(1.01);
+   background: #f8fafc;
+}
+
+/* CELLS */
+tbody td {
+   padding: 14px;
+   font-size: 14px;
+   color:linear-gradient(180deg, #0a2540, #0d3b66);
+}
+
+/* ROUNDED ROW */
+tbody td:first-child {
+   border-top-left-radius: 10px;
+   border-bottom-left-radius: 10px;
+}
+
+tbody td:last-child {
+   border-top-right-radius: 10px;
+   border-bottom-right-radius: 10px;
+}
+
+/* STATUS BADGES */
+.status {
+   padding: 5px 12px;
+   border-radius: 20px;
+   font-size: 12px;
+   font-weight: 600;
+   display: inline-block;
+}
+
+.status-success {
+   background: #dcfce7;
+   color: #16a34a;
+}
+
+.status-pending {
+   background: #fef3c7;
+   color: #d97706;
+}
+
+/* AMOUNT STYLE */
+.amount {
+   font-weight: 600;
+   color: linear-gradient(180deg, #0a2540, #0d3b66);
+}
+
+/* BUTTON */
+.action-btn {
+   background: linear-gradient(180deg, #0a2540, #0d3b66);
+   color: white;
+   border: none;
+   padding: 6px 14px;
+   border-radius: 8px;
+   font-size: 13px;
+   cursor: pointer;
+   transition: 0.2s;
+}
+
+.action-btn:hover {
+   background: linear-gradient(180deg, #0a2540, #0d3b66);
+   transform: scale(1.05);
+}
+
+/* NO DATA */
+.no-data {
+   text-align: center;
+   padding: 20px;
+   color: #777;
+}
+
+</style>
+
+
+<div class="page-card">
+
+   <h2 class="page-title">Payment History</h2>
+
+   <table>
+
+      <thead>
+         <tr>
+            <th>Student</th>
+            <th>Project</th>
+            <th>Amount Paid</th>
+            <th>Status</th>
+            <th>Payment Date</th>
+            <th>Action</th>
+         </tr>
+      </thead>
+
+      <tbody>
+
+         {% for payment in payments %}
+
+         <tr>
+
+            <td>{{ payment.user.username }}</td>
+
+            <td>{{ payment.project.title }}</td>
+
+            <td class="amount">₹ {{ payment.amount }}</td>
+
+            <td>
+               {% if payment.status == "SUCCESS" %}
+               <span class="status status-success">Paid Successfully</span>
+               {% else %}
+               <span class="status status-pending">Pending</span>
+               {% endif %}
+            </td>
+
+            <td>{{ payment.created_at }}</td>
+
+            <td>
+               <a href="{% url 'admin_payment_details' payment.id %}">
+                  <button class="action-btn">View</button>
+               </a>
+            </td>
+
+         </tr>
+
+         {% empty %}
+
+         <tr>
+            <td colspan="6" class="no-data">
+               No payment records found
+            </td>
+         </tr>
+
+         {% endfor %}
+
+      </tbody>
+
+   </table>
+
+</div>
+
+{% endblock %}
